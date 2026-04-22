@@ -40,7 +40,7 @@ This split allows simultaneous playback in multiple voice channels of the same g
 ### 1. Clone
 
 ```bash
-git clone <repo-url> musicbot
+git clone https://gitlab.com/yokkkoso/musicbot musicbot
 cd musicbot
 ```
 

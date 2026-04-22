@@ -40,7 +40,7 @@
 ### 1. Клонирование
 
 ```bash
-git clone <repo-url> musicbot
+git clone https://gitlab.com/yokkkoso/musicbot musicbot
 cd musicbot
 ```
 
