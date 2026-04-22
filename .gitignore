@@ -1,0 +1,15 @@
+# Dev directories
+.vs/
+.idea/
+
+# Build
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bot
+
+# Configs
+configs/config.toml
+.env

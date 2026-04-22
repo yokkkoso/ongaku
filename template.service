@@ -1,0 +1,14 @@
+[Unit]
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+ExecStart=CHANGE_ME
+WorkingDirectory=CHANGE_ME
+User=CHANGE_ME
+Restart=always
+RestartSec=4s
+
+[Install]
+WantedBy=multi-user.target
