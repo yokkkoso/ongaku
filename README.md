@@ -34,54 +34,16 @@ This split allows simultaneous playback in multiple voice channels of the same g
 | **Lavalink**   | 4.x — https://lavalink.dev/                                |
 | **Build**      | `CGO_ENABLED=1` + C/C++ toolchain (gcc/clang, make, cmake) |
 
-## Setup
+## Configuration (config.toml)
 
-### 1. Clone
-
-```bash
-git clone https://gitlab.com/yokkkoso/musicbot musicbot
-cd musicbot
-```
-
-### 2. Lavalink
-
-Run your own Lavalink server following the [official documentation](https://lavalink.dev/) and install the [lavasrc](https://github.com/topi314/LavaSrc), [lavasearch](https://github.com/topi314/LavaSearch), and [youtube-plugin](https://github.com/lavalink-devs/youtube-source) plugins.
-
-### 3. Configuration
-
-```bash
-cp configs/config.example.toml configs/config.toml
-```
-
-Fill in the fields:
-
-| Field                | Purpose                                                                        |
-|----------------------|--------------------------------------------------------------------------------|
-| `dj_token`           | DJ bot token                                                                   |
-| `color`              | Embed color (decimal int)                                                      |
-| `sync_commands`      | Whether to register slash commands on startup (only needed for the first run)  |
-| `[database]`         | PostgreSQL connection                                                          |
-| `[[discord_nodes]]`  | Array of Node bots (at least one)                                              |
-| `[[lavalink_nodes]]` | Array of Lavalink nodes (at least one)                                         |
-
-### 4. Build and run
-
-```bash
-make build   # build
-make run     # build + run
-```
-
-## Running on Linux (systemd)
-
-```bash
-echo 'SERVICE_NAME := MusicBot.service' > config.make
-make service-install
-make service-enable
-make service-start
-make service-status
-```
-
-`service-install` builds the binary, substitutes paths into `template.service`, and registers the unit in systemd.
+| Field                | Purpose                                                                             |
+|----------------------|-------------------------------------------------------------------------------------|
+| `dj_token`           | DJ bot token                                                                        |
+| `color`              | Embed color (decimal int)                                                           |
+| `sync_commands`      | Whether to register slash commands on startup (Recomend to disable after first run) |
+| `[database]`         | PostgreSQL connection                                                               |
+| `[[discord_nodes]]`  | Array of Node bots (at least one)                                                   |
+| `[[lavalink_nodes]]` | Array of Lavalink nodes (at least one)                                              |
 
 ## Running with Docker
 
@@ -100,11 +62,44 @@ The bot image is published to the GitLab Container Registry. Postgres and Lavali
      --name musicbot \
      --restart unless-stopped \
      --network host \
-     -v "$PWD/config.toml:/app/configs/config.toml:ro" \
+     -v "./config.toml:/app/configs/config.toml:ro" \
      registry.gitlab.com/yokkkoso/musicbot:latest
    ```
 
 `--network host` gives the container direct access to Postgres/Lavalink on `localhost`. If the services run on a different host, put their IP or DNS in `config.toml` and drop `--network host`.
+
+## Running on Linux (systemd)
+
+### 1. Clone
+
+```bash
+git clone https://gitlab.com/yokkkoso/musicbot musicbot
+cd musicbot
+```
+
+### 2. Lavalink
+
+Run your own Lavalink server following the [official documentation](https://lavalink.dev/) and install the [lavasrc](https://github.com/topi314/LavaSrc), [lavasearch](https://github.com/topi314/LavaSearch), and [youtube-plugin](https://github.com/lavalink-devs/youtube-source) plugins.
+
+### 3. Configuration
+
+```bash
+cp configs/config.example.toml configs/config.toml
+```
+
+Fill with your values
+
+### 4. Build and run
+
+```bash
+make build   # build
+make run     # build + run
+echo 'SERVICE_NAME := MusicBot.service' > config.make
+make service-install
+make service-enable
+make service-start
+make service-status
+```
 
 ## License
 
