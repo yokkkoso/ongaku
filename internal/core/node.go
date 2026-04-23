@@ -16,10 +16,10 @@ import (
 	"github.com/disgoorg/disgo/voice"
 	"github.com/disgoorg/disgolink/v3/disgolink"
 	"github.com/disgoorg/disgolink/v3/lavalink"
-	"github.com/disgoorg/godave/golibdave"
 	"github.com/disgoorg/json"
 	"github.com/disgoorg/snowflake/v2"
 	"github.com/rs/zerolog/log"
+	"github.com/thomas-vilte/dave-go/session"
 	"gitlab.com/yokkkoso/musicbot/internal/config_manager"
 	"gitlab.com/yokkkoso/musicbot/internal/database"
 	"gitlab.com/yokkkoso/musicbot/internal/utils"
@@ -141,7 +141,7 @@ func (n *Node) SetUpClients(
 		bot.WithEventListenerFunc(n.onVoiceServerUpdate),
 		bot.WithEventListenerFunc(n.onReady),
 		bot.WithVoiceManagerConfigOpts(
-			voice.WithDaveSessionCreateFunc(golibdave.NewSession),
+			voice.WithDaveSessionCreateFunc(session.New),
 		),
 	); err != nil {
 		log.Err(err).Msg("Failed to start node bot")

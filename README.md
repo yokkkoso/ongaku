@@ -2,38 +2,37 @@
 
 ***English** · [Русский](README_ru.md)*
 
-Multi-instance Discord music bot written in Go. Supports Spotify, Yandex Music, SoundCloud, YouTube, and DAVE.
+Multi-instance Discord music bot written in Go, powered by Lavalink.
 
 ---
 
 ## Features
 
-- Playback from **Spotify**, **Yandex Music**, **SoundCloud**, **YouTube**, and any source supported by Lavalink.
-- Track and album search via `/search` with one-click play from the results.
-- Queue with `off / track / queue` repeat modes, pagination, and per-item removal.
-- Slash commands + an interactive button-based player (pause, next, volume, repeat, stop).
+- Playback from **Spotify**, **Yandex Music**, **SoundCloud**, **YouTube**, and any source supported by Lavalink (requires modifying [/play](./internal/handlers/commands/play.go) and [/search](./internal/handlers/commands/search.go) files).
+- Track and album search via `/search`.
+- Queue with repeat modes.
+- Slash commands + interactive button-based player (pause, next, volume, repeat, stop).
 - Auto-leave from an empty voice channel after 5 minutes.
-- Queue recovery after restart — state is persisted in PostgreSQL.
-- Support [godave](https://github.com/disgoorg/godave).
+- Queue recovery after restart.
+- Support for [DAVE](https://github.com/thomas-vilte/dave-go).
 
 ## Architecture
 
-The bot runs as two roles:
+The bot runs as two subsystems:
 
-- **DJ** — the single bot that receives users' slash commands. Owns the shared node registry and the database.
-- **Node** — a pool of separate Discord bots that actually occupy voice channels. The DJ picks a free Node per `(guild, channel)` pair and delegates playback to it through Lavalink.
+- **DJ** — the main bot that receives users' slash commands.
+- **Node** — a pool of separate bots that actually connect to voice channels. The DJ picks a free Node per `(guild, channel)` pair and delegates playback to it through Lavalink.
 
 This split allows simultaneous playback in multiple voice channels of the same guild — concurrency is bounded by the number of configured Node bots.
 
 ## Requirements
 
-| | |
-|---|---|
-| **Go** | 1.26+ |
-| **PostgreSQL** | 13+ |
-| **Lavalink** | 4.x — https://lavalink.dev/ |
-| **libdave** | built from source, see below |
-| **Build** | `CGO_ENABLED=1` + C/C++ toolchain (gcc/clang, make, cmake) |
+|                |                                                            |
+|----------------|------------------------------------------------------------|
+| **Go**         | 1.26+                                                      |
+| **PostgreSQL** | 13+                                                        |
+| **Lavalink**   | 4.x — https://lavalink.dev/                                |
+| **Build**      | `CGO_ENABLED=1` + C/C++ toolchain (gcc/clang, make, cmake) |
 
 ## Setup
 
@@ -44,25 +43,11 @@ git clone https://gitlab.com/yokkkoso/musicbot musicbot
 cd musicbot
 ```
 
-### 2. libdave (required before building)
+### 2. Lavalink
 
-The project imports `github.com/disgoorg/godave/golibdave`, which dynamically links against the native **libdave** library — the reference implementation of Discord E2EE. There is no `go install` equivalent: you need to run the install script from the [godave](https://github.com/disgoorg/godave) repo, which fetches libdave sources and builds `.so` / `.dylib` / `.dll`:
+Run your own Lavalink server following the [official documentation](https://lavalink.dev/) and install the [lavasrc](https://github.com/topi314/LavaSrc), [lavasearch](https://github.com/topi314/LavaSearch), and [youtube-plugin](https://github.com/lavalink-devs/youtube-source) plugins.
 
-```bash
-# Linux / macOS / WSL
-./libdave_install.sh v1.1.0
-
-# Windows
-.\libdave_install.ps1 v1.1.0
-```
-
-### 3. Lavalink
-
-Run your own Lavalink server following the [official documentation](https://lavalink.dev/), along with the [lavasrc](https://github.com/topi314/LavaSrc) and [lavasearch](https://github.com/topi314/LavaSearch) plugins.
-
-At minimum: Lavalink must be reachable at `host:port` with a password matching a `[[lavalink_nodes]]` entry.
-
-### 4. Configuration
+### 3. Configuration
 
 ```bash
 cp configs/config.example.toml configs/config.toml
@@ -70,23 +55,23 @@ cp configs/config.example.toml configs/config.toml
 
 Fill in the fields:
 
-| Field | Purpose |
-|---|---|
-| `dj_token` | DJ bot token |
-| `color` | Embed color (decimal int) |
-| `sync_commands` | Register slash commands on startup |
-| `[database]` | PostgreSQL connection |
-| `[[discord_nodes]]` | Array of Node bots (at least one) |
-| `[[lavalink_nodes]]` | Array of Lavalink nodes (at least one) |
+| Field                | Purpose                                                                        |
+|----------------------|--------------------------------------------------------------------------------|
+| `dj_token`           | DJ bot token                                                                   |
+| `color`              | Embed color (decimal int)                                                      |
+| `sync_commands`      | Whether to register slash commands on startup (only needed for the first run)  |
+| `[database]`         | PostgreSQL connection                                                          |
+| `[[discord_nodes]]`  | Array of Node bots (at least one)                                              |
+| `[[lavalink_nodes]]` | Array of Lavalink nodes (at least one)                                         |
 
-### 5. Build and run
+### 4. Build and run
 
 ```bash
-make build   # builds ./bot with embedded git hash + build stamp
+make build   # build
 make run     # build + run
 ```
 
-## Running under systemd
+## Running on Linux (systemd)
 
 ```bash
 echo 'SERVICE_NAME := MusicBot.service' > config.make
@@ -96,8 +81,35 @@ make service-start
 make service-status
 ```
 
-`service-install` builds the binary, substitutes paths into `template.service`, and registers the unit under `/etc/systemd/system/`.
+`service-install` builds the binary, substitutes paths into `template.service`, and registers the unit in systemd.
+
+## Running with Docker
+
+The bot image is published to the GitLab Container Registry. Postgres and Lavalink must be set up separately (via your package manager, separate containers, etc.) and their addresses supplied in `config.toml`.
+
+1. Download the example `config.toml` and fill it in:
+
+   ```bash
+   curl -o config.toml https://gitlab.com/yokkkoso/musicbot/-/raw/master/configs/config.example.toml
+   ```
+
+2. Run the container:
+
+   ```bash
+   docker run -d \
+     --name musicbot \
+     --restart unless-stopped \
+     --network host \
+     -v "$PWD/config.toml:/app/configs/config.toml:ro" \
+     registry.gitlab.com/yokkkoso/musicbot:latest
+   ```
+
+`--network host` gives the container direct access to Postgres/Lavalink on `localhost`. If the services run on a different host, put their IP or DNS in `config.toml` and drop `--network host`.
 
 ## License
 
 [GNU AGPL-3.0](LICENSE). If you run a modified version as a service (including as a Discord bot), the source code of your modifications must be made available to the users of that service.
+
+---
+
+*The only thing AI-generated here is this README — I was too lazy to write it myself, though I ended up rewriting it anyway.*

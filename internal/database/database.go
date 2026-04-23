@@ -37,7 +37,7 @@ func InitDatabase(client *bot.Client) (*Database, error) {
 			),
 		),
 		&gorm.Config{
-			Logger: gormLogger.Default.LogMode(gormLogger.Info),
+			Logger: gormLogger.Default.LogMode(gormLogger.Silent),
 		},
 	)
 
