@@ -20,9 +20,9 @@ import (
 	"github.com/disgoorg/snowflake/v2"
 	"github.com/rs/zerolog/log"
 	"github.com/thomas-vilte/dave-go/session"
-	"gitlab.com/yokkkoso/musicbot/internal/config_manager"
-	"gitlab.com/yokkkoso/musicbot/internal/database"
-	"gitlab.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/musicbot/internal/config_manager"
+	"github.com/yokkkoso/musicbot/internal/database"
+	"github.com/yokkkoso/musicbot/internal/utils"
 )
 
 type Node struct {

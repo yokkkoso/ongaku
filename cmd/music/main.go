@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/disgoorg/snowflake/v2"
-	"gitlab.com/yokkkoso/musicbot/internal/config_manager"
-	"gitlab.com/yokkkoso/musicbot/internal/core"
-	"gitlab.com/yokkkoso/musicbot/internal/handlers"
-	"gitlab.com/yokkkoso/musicbot/internal/utils/logger"
+	"github.com/yokkkoso/musicbot/internal/config_manager"
+	"github.com/yokkkoso/musicbot/internal/core"
+	"github.com/yokkkoso/musicbot/internal/handlers"
+	"github.com/yokkkoso/musicbot/internal/utils/logger"
 )
 
 func main() {

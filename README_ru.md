@@ -48,12 +48,12 @@
 
 ## Запуск через Docker
 
-Образ бота публикуется в GitLab Container Registry. Postgres и Lavalink нужно поднять самостоятельно (через пакетный менеджер, отдельные контейнеры и т.п.) и указать их адреса в `config.toml`.
+Образ бота публикуется в GitHub Container Registry. Postgres и Lavalink нужно поднять самостоятельно (через пакетный менеджер, отдельные контейнеры и т.п.) и указать их адреса в `config.toml`.
 
 1. Скачать пример `config.toml` и заполнить:
 
    ```bash
-   curl -o config.toml https://gitlab.com/yokkkoso/musicbot/-/raw/master/configs/config.example.toml
+   curl -o config.toml https://raw.githubusercontent.com/yokkkoso/musicbot/master/configs/config.example.toml
    ```
 
 2. Запустить контейнер:
@@ -64,7 +64,7 @@
      --restart unless-stopped \
      --network host \
      -v "./config.toml:/app/configs/config.toml:ro" \
-     registry.gitlab.com/yokkkoso/musicbot:latest
+     ghcr.io/yokkkoso/musicbot:latest
    ```
 
 `--network host` даёт контейнеру прямой доступ к Postgres/Lavalink на `localhost`. Если сервисы на другом хосте — указать их IP или DNS в `config.toml` и убрать `--network host`.
@@ -74,7 +74,7 @@
 ### 1. Клонирование
 
 ```bash
-git clone https://gitlab.com/yokkkoso/musicbot musicbot
+git clone https://github.com/yokkkoso/musicbot musicbot
 cd musicbot
 ```
 

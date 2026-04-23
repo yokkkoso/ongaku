@@ -7,7 +7,7 @@ import (
 
 	"github.com/disgoorg/disgo/bot"
 	"github.com/pressly/goose/v3"
-	"gitlab.com/yokkkoso/musicbot/internal/config_manager"
+	"github.com/yokkkoso/musicbot/internal/config_manager"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	gormLogger "gorm.io/gorm/logger"

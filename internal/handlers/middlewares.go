@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/disgo/handler"
-	"gitlab.com/yokkkoso/musicbot/internal/utils/exptime"
+	"github.com/yokkkoso/musicbot/internal/utils/exptime"
 )
 
 func HasExpiredTime(next handler.Handler) handler.Handler {

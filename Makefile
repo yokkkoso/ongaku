@@ -21,8 +21,8 @@ endif
 .PHONY: build-flags
 build-flags: build-info
 	$(eval BUILD_LDFLAGS := $(LDFLAGS))
-	$(eval BUILD_LDFLAGS += -X 'gitlab.com/yokkkoso/musicbot/internal/build.githash=$(GITHASH)')
-	$(eval BUILD_LDFLAGS += -X 'gitlab.com/yokkkoso/musicbot/internal/build.buildstamp=$(BUILD_DATE)')
+	$(eval BUILD_LDFLAGS += -X 'github.com/yokkkoso/musicbot/internal/build.githash=$(GITHASH)')
+	$(eval BUILD_LDFLAGS += -X 'github.com/yokkkoso/musicbot/internal/build.buildstamp=$(BUILD_DATE)')
 	$(eval BUILD_FLAGS := -ldflags "$(BUILD_LDFLAGS)" -o $(BINARY))
 
 .PHONY: build

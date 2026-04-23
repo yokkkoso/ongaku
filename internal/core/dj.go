@@ -19,9 +19,9 @@ import (
 	"github.com/disgoorg/json"
 	"github.com/disgoorg/snowflake/v2"
 	"github.com/rs/zerolog/log"
-	"gitlab.com/yokkkoso/musicbot/internal/database"
-	"gitlab.com/yokkkoso/musicbot/internal/utils"
-	"gitlab.com/yokkkoso/musicbot/internal/utils/array"
+	"github.com/yokkkoso/musicbot/internal/database"
+	"github.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/musicbot/internal/utils/array"
 )
 
 func NewDJ() *DJ {

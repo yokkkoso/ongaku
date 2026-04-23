@@ -5,7 +5,7 @@ import (
 
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/snowflake/v2"
-	"gitlab.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/musicbot/internal/utils"
 )
 
 var buttonsEmoji = map[PageAction]string{

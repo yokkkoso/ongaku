@@ -47,12 +47,12 @@ This split allows simultaneous playback in multiple voice channels of the same g
 
 ## Running with Docker
 
-The bot image is published to the GitLab Container Registry. Postgres and Lavalink must be set up separately (via your package manager, separate containers, etc.) and their addresses supplied in `config.toml`.
+The bot image is published to the GitHub Container Registry. Postgres and Lavalink must be set up separately (via your package manager, separate containers, etc.) and their addresses supplied in `config.toml`.
 
 1. Download the example `config.toml` and fill it in:
 
    ```bash
-   curl -o config.toml https://gitlab.com/yokkkoso/musicbot/-/raw/master/configs/config.example.toml
+   curl -o config.toml https://raw.githubusercontent.com/yokkkoso/musicbot/master/configs/config.example.toml
    ```
 
 2. Run the container:
@@ -63,7 +63,7 @@ The bot image is published to the GitLab Container Registry. Postgres and Lavali
      --restart unless-stopped \
      --network host \
      -v "./config.toml:/app/configs/config.toml:ro" \
-     registry.gitlab.com/yokkkoso/musicbot:latest
+     ghcr.io/yokkkoso/musicbot:latest
    ```
 
 `--network host` gives the container direct access to Postgres/Lavalink on `localhost`. If the services run on a different host, put their IP or DNS in `config.toml` and drop `--network host`.
@@ -73,7 +73,7 @@ The bot image is published to the GitLab Container Registry. Postgres and Lavali
 ### 1. Clone
 
 ```bash
-git clone https://gitlab.com/yokkkoso/musicbot musicbot
+git clone https://github.com/yokkkoso/musicbot musicbot
 cd musicbot
 ```
 

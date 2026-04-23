@@ -1,4 +1,4 @@
-module gitlab.com/yokkkoso/musicbot
+module github.com/yokkkoso/musicbot
 
 go 1.26.0
 

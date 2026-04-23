@@ -10,10 +10,10 @@ import (
 	"github.com/disgoorg/disgolink/v3/lavalink"
 	"github.com/disgoorg/json"
 	"github.com/disgoorg/snowflake/v2"
-	"gitlab.com/yokkkoso/musicbot/internal/core"
-	"gitlab.com/yokkkoso/musicbot/internal/database"
-	"gitlab.com/yokkkoso/musicbot/internal/utils"
-	"gitlab.com/yokkkoso/musicbot/internal/utils/progress_bar"
+	"github.com/yokkkoso/musicbot/internal/core"
+	"github.com/yokkkoso/musicbot/internal/database"
+	"github.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/musicbot/internal/utils/progress_bar"
 )
 
 var nowPlayingCommand = discord.SlashCommandCreate{

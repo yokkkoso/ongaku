@@ -6,8 +6,8 @@ import (
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/disgo/handler"
 	"github.com/disgoorg/disgolink/v3/lavalink"
-	"gitlab.com/yokkkoso/musicbot/internal/core"
-	"gitlab.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/musicbot/internal/core"
+	"github.com/yokkkoso/musicbot/internal/utils"
 )
 
 var volumeCommand = discord.SlashCommandCreate{

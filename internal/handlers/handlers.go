@@ -8,9 +8,9 @@ import (
 	"github.com/disgoorg/snowflake/v2"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
-	"gitlab.com/yokkkoso/musicbot/internal/core"
-	"gitlab.com/yokkkoso/musicbot/internal/handlers/commands"
-	"gitlab.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/musicbot/internal/core"
+	"github.com/yokkkoso/musicbot/internal/handlers/commands"
+	"github.com/yokkkoso/musicbot/internal/utils"
 )
 
 func SyncCommands(dj *core.DJ) {
