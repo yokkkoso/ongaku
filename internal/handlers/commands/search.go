@@ -11,10 +11,10 @@ import (
 	"github.com/disgoorg/lavasearch-plugin"
 	"github.com/disgoorg/lavasrc-plugin"
 	"github.com/rs/zerolog/log"
-	"github.com/yokkkoso/musicbot/internal/core"
-	"github.com/yokkkoso/musicbot/internal/database"
-	"github.com/yokkkoso/musicbot/internal/utils"
-	"github.com/yokkkoso/musicbot/internal/utils/uri_cache"
+	"github.com/yokkkoso/ongaku/internal/core"
+	"github.com/yokkkoso/ongaku/internal/database"
+	"github.com/yokkkoso/ongaku/internal/utils"
+	"github.com/yokkkoso/ongaku/internal/utils/uri_cache"
 )
 
 var searchCommand = discord.SlashCommandCreate{

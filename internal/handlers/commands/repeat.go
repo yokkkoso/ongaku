@@ -3,9 +3,9 @@ package commands
 import (
 	"github.com/disgoorg/disgo/discord"
 	"github.com/disgoorg/disgo/handler"
-	"github.com/yokkkoso/musicbot/internal/core"
-	"github.com/yokkkoso/musicbot/internal/database"
-	"github.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/ongaku/internal/core"
+	"github.com/yokkkoso/ongaku/internal/database"
+	"github.com/yokkkoso/ongaku/internal/utils"
 )
 
 var repeatCommand = discord.SlashCommandCreate{

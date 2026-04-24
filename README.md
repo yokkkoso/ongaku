@@ -1,4 +1,4 @@
-# MusicBot
+# Ongaku
 
 ***English** · [Русский](README_ru.md)*
 
@@ -52,18 +52,18 @@ The bot image is published to the GitHub Container Registry. Postgres and Lavali
 1. Download the example `config.toml` and fill it in:
 
    ```bash
-   curl -o config.toml https://raw.githubusercontent.com/yokkkoso/musicbot/master/configs/config.example.toml
+   curl -o config.toml https://raw.githubusercontent.com/yokkkoso/ongaku/master/configs/config.example.toml
    ```
 
 2. Run the container:
 
    ```bash
    docker run -d \
-     --name musicbot \
+     --name ongaku \
      --restart unless-stopped \
      --network host \
      -v "./config.toml:/app/configs/config.toml:ro" \
-     ghcr.io/yokkkoso/musicbot:latest
+     ghcr.io/yokkkoso/ongaku:latest
    ```
 
 `--network host` gives the container direct access to Postgres/Lavalink on `localhost`. If the services run on a different host, put their IP or DNS in `config.toml` and drop `--network host`.
@@ -73,8 +73,8 @@ The bot image is published to the GitHub Container Registry. Postgres and Lavali
 ### 1. Clone
 
 ```bash
-git clone https://github.com/yokkkoso/musicbot musicbot
-cd musicbot
+git clone https://github.com/yokkkoso/ongaku ongaku
+cd ongaku
 ```
 
 ### 2. Lavalink
@@ -94,7 +94,7 @@ Fill with your values
 ```bash
 make build   # build
 make run     # build + run
-echo 'SERVICE_NAME := MusicBot.service' > config.make
+echo 'SERVICE_NAME := Ongaku.service' > config.make
 make service-install
 make service-enable
 make service-start

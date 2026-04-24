@@ -12,9 +12,9 @@ import (
 	"github.com/disgoorg/disgolink/v3/disgolink"
 	"github.com/disgoorg/disgolink/v3/lavalink"
 	"github.com/rs/zerolog/log"
-	"github.com/yokkkoso/musicbot/internal/core"
-	"github.com/yokkkoso/musicbot/internal/database"
-	"github.com/yokkkoso/musicbot/internal/utils"
+	"github.com/yokkkoso/ongaku/internal/core"
+	"github.com/yokkkoso/ongaku/internal/database"
+	"github.com/yokkkoso/ongaku/internal/utils"
 )
 
 var searchPattern = regexp.MustCompile(`^(.{2})search:(.+)`)

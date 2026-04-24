@@ -1,4 +1,4 @@
-# MusicBot
+# Ongaku
 
 *[English](README.md) · **Русский***
 
@@ -53,18 +53,18 @@
 1. Скачать пример `config.toml` и заполнить:
 
    ```bash
-   curl -o config.toml https://raw.githubusercontent.com/yokkkoso/musicbot/master/configs/config.example.toml
+   curl -o config.toml https://raw.githubusercontent.com/yokkkoso/ongaku/master/configs/config.example.toml
    ```
 
 2. Запустить контейнер:
 
    ```bash
    docker run -d \
-     --name musicbot \
+     --name ongaku \
      --restart unless-stopped \
      --network host \
      -v "./config.toml:/app/configs/config.toml:ro" \
-     ghcr.io/yokkkoso/musicbot:latest
+     ghcr.io/yokkkoso/ongaku:latest
    ```
 
 `--network host` даёт контейнеру прямой доступ к Postgres/Lavalink на `localhost`. Если сервисы на другом хосте — указать их IP или DNS в `config.toml` и убрать `--network host`.
@@ -74,8 +74,8 @@
 ### 1. Клонирование
 
 ```bash
-git clone https://github.com/yokkkoso/musicbot musicbot
-cd musicbot
+git clone https://github.com/yokkkoso/ongaku ongaku
+cd ongaku
 ```
 
 ### 2. Lavalink
@@ -95,7 +95,7 @@ cp configs/config.example.toml configs/config.toml
 ```bash
 make build   # сборка
 make run     # сборка + запуск
-echo 'SERVICE_NAME := MusicBot.service' > config.make
+echo 'SERVICE_NAME := Ongaku.service' > config.make
 make service-install
 make service-enable
 make service-start

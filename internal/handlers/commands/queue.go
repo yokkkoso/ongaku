@@ -11,12 +11,12 @@ import (
 	"github.com/disgoorg/disgolink/v3/lavalink"
 	"github.com/disgoorg/json"
 	"github.com/disgoorg/snowflake/v2"
-	"github.com/yokkkoso/musicbot/internal/core"
-	"github.com/yokkkoso/musicbot/internal/database"
-	"github.com/yokkkoso/musicbot/internal/utils"
-	"github.com/yokkkoso/musicbot/internal/utils/array"
-	"github.com/yokkkoso/musicbot/internal/utils/exptime"
-	"github.com/yokkkoso/musicbot/internal/utils/pagination"
+	"github.com/yokkkoso/ongaku/internal/core"
+	"github.com/yokkkoso/ongaku/internal/database"
+	"github.com/yokkkoso/ongaku/internal/utils"
+	"github.com/yokkkoso/ongaku/internal/utils/array"
+	"github.com/yokkkoso/ongaku/internal/utils/exptime"
+	"github.com/yokkkoso/ongaku/internal/utils/pagination"
 )
 
 var queueCommand = discord.SlashCommandCreate{

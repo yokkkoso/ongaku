@@ -1,4 +1,4 @@
-module github.com/yokkkoso/musicbot
+module github.com/yokkkoso/ongaku
 
 go 1.26.0
 
