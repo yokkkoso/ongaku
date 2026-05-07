@@ -9,7 +9,7 @@ require (
 	github.com/disgoorg/lavasearch-plugin v1.0.1-0.20231229185935-76caa6d35100
 	github.com/disgoorg/lavasrc-plugin v1.0.0
 	github.com/disgoorg/snowflake/v2 v2.0.3
-	github.com/fsnotify/fsnotify v1.9.0
+	github.com/fsnotify/fsnotify v1.10.1
 	github.com/jellydator/ttlcache/v3 v3.4.0
 	github.com/pressly/goose/v3 v3.27.0
 	github.com/rs/zerolog v1.35.1
