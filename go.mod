@@ -14,7 +14,7 @@ require (
 	github.com/pressly/goose/v3 v3.27.0
 	github.com/rs/zerolog v1.35.1
 	github.com/spf13/viper v1.21.0
-	github.com/thomas-vilte/dave-go v0.2.0
+	github.com/thomas-vilte/dave-go v0.2.1
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1
 )
