@@ -207,7 +207,7 @@ func (n *Node) onTrackStart(player disgolink.Player, event lavalink.TrackStartEv
 	}
 
 	voiceChannel := "—"
-	if voiceState, ok := n.DiscordClient.Caches.VoiceState(player.GuildID(), n.ID()); ok && voiceState.ChannelID != nil {
+	if voiceState, ok := n.DJ.Client.Caches.VoiceState(player.GuildID(), n.ID()); ok && voiceState.ChannelID != nil {
 		voiceChannel = discord.ChannelMention(*voiceState.ChannelID)
 	}
 
@@ -218,6 +218,7 @@ func (n *Node) onTrackStart(player disgolink.Player, event lavalink.TrackStartEv
 		AddField("Сервер", guildName, true).
 		AddField("Голосовой канал", voiceChannel, true).
 		AddField("Бот", discord.UserMention(n.ID()), true).
+		WithTimestamp(time.Now()).
 		WithFooterTextf("Длительность: %s", utils.FormatDuration(info.Length))
 
 	if info.ArtworkURL != nil {
