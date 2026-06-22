@@ -5,6 +5,7 @@ type Config struct {
 	Color         int                  `mapstructure:"color"`
 	SyncCommands  bool                 `mapstructure:"sync_commands"`
 	IsDev         bool                 `mapstructure:"is_dev"`
+	LogChannelID  string               `mapstructure:"log_channel_id"`
 	Database      DatabaseConfig       `mapstructure:"database"`
 	DiscordNodes  []DiscordNodeConfig  `mapstructure:"discord_nodes"`
 	LavalinkNodes []LavalinkNodeConfig `mapstructure:"lavalink_nodes"`

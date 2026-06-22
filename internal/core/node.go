@@ -150,6 +150,7 @@ func (n *Node) SetUpClients(
 
 	n.LavalinkClient = disgolink.New(
 		n.ID(),
+		disgolink.WithListenerFunc(n.onTrackStart),
 		disgolink.WithListenerFunc(n.onTrackEnd),
 		disgolink.WithListenerFunc(n.onTrackException),
 		disgolink.WithListenerFunc(n.onTrackStuck),
@@ -176,6 +177,59 @@ func (n *Node) SetUpClients(
 
 func (n *Node) ID() snowflake.ID {
 	return n.DiscordClient.ApplicationID
+}
+
+func (n *Node) onTrackStart(player disgolink.Player, event lavalink.TrackStartEvent) {
+	logChannelID := config_manager.GetConfigManager().Get().LogChannelID
+	if logChannelID == "" {
+		return
+	}
+
+	channelID, err := snowflake.Parse(logChannelID)
+	if err != nil {
+		log.Err(err).Str("log_channel_id", logChannelID).Msg("Invalid log channel ID")
+		return
+	}
+
+	userData := database.TrackUserData{}
+	_ = event.Track.UserData.Unmarshal(&userData)
+
+	info := event.Track.Info
+
+	uri := ""
+	if info.URI != nil {
+		uri = *info.URI
+	}
+
+	guildName := player.GuildID().String()
+	if guild, ok := n.DJ.Client.Caches.Guild(player.GuildID()); ok {
+		guildName = guild.Name
+	}
+
+	voiceChannel := "—"
+	if voiceState, ok := n.DiscordClient.Caches.VoiceState(player.GuildID(), n.ID()); ok && voiceState.ChannelID != nil {
+		voiceChannel = discord.ChannelMention(*voiceState.ChannelID)
+	}
+
+	embed := utils.NewBaseEmbed().
+		WithTitle("▶️ Запущена песня").
+		WithDescriptionf("**[%s](%s)**\n**Исполнитель**: %s", info.Title, uri, info.Author).
+		AddField("Запустил", discord.UserMention(userData.OrderedByID)+" ("+userData.OrderedByTag+")", true).
+		AddField("Сервер", guildName, true).
+		AddField("Голосовой канал", voiceChannel, true).
+		AddField("Бот", discord.UserMention(n.ID()), true).
+		WithFooterTextf("Длительность: %s", utils.FormatDuration(info.Length))
+
+	if info.ArtworkURL != nil {
+		embed = embed.WithThumbnail(*info.ArtworkURL)
+	}
+
+	if _, err := n.DJ.Client.Rest.CreateMessage(
+		channelID,
+		discord.NewMessageCreate().AddEmbeds(embed),
+	); err != nil {
+		log.Err(err).Str("node", n.ID().String()).Msg("Failed to send track start log")
+	}
 }
 
 func (n *Node) onTrackEnd(player disgolink.Player, event lavalink.TrackEndEvent) {
