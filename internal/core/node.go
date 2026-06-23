@@ -207,8 +207,8 @@ func (n *Node) onTrackStart(player disgolink.Player, event lavalink.TrackStartEv
 	}
 
 	voiceChannel := "—"
-	if voiceState, ok := n.DJ.Client.Caches.VoiceState(player.GuildID(), n.ID()); ok && voiceState.ChannelID != nil {
-		voiceChannel = discord.ChannelMention(*voiceState.ChannelID)
+	if queue, err := n.DJ.Database.GetQueue(player.GuildID(), n.ID()); err == nil && queue.ChannelID != 0 {
+		voiceChannel = discord.ChannelMention(queue.ChannelID)
 	}
 
 	embed := utils.NewBaseEmbed().
