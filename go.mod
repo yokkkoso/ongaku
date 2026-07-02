@@ -11,7 +11,7 @@ require (
 	github.com/disgoorg/snowflake/v2 v2.0.3
 	github.com/fsnotify/fsnotify v1.10.1
 	github.com/jellydator/ttlcache/v3 v3.4.1
-	github.com/pressly/goose/v3 v3.27.1
+	github.com/pressly/goose/v3 v3.27.2
 	github.com/rs/zerolog v1.35.1
 	github.com/spf13/viper v1.21.0
 	github.com/thomas-vilte/dave-go v0.2.4
