@@ -124,7 +124,6 @@ func (dj *DJ) InitDiscordClient(token string) {
 		bot.WithGatewayConfigOpts(
 			gateway.WithIntents(
 				gateway.IntentGuilds,
-				gateway.IntentGuildMembers,
 				gateway.IntentGuildVoiceStates,
 			),
 		),
@@ -132,7 +131,6 @@ func (dj *DJ) InitDiscordClient(token string) {
 			cache.WithCaches(
 				cache.FlagGuilds,
 				cache.FlagChannels,
-				cache.FlagMembers,
 				cache.FlagVoiceStates,
 			),
 		),
@@ -141,7 +139,6 @@ func (dj *DJ) InitDiscordClient(token string) {
 		),
 		bot.WithEventManagerConfigOpts(bot.WithAsyncEventsEnabled()),
 		bot.WithEventListenerFunc(dj.onReady),
-		bot.WithMemberChunkingFilter(bot.MemberChunkingFilterAll),
 	); err != nil {
 		log.Fatal().Err(err).Msg("Failed to start bot")
 	}
@@ -169,16 +166,21 @@ func (dj *DJ) InitPreviousPlayers() {
 			continue
 		}
 
-		audioChannel, ok := dj.Client.Caches.GuildAudioChannel(queue.ChannelID)
-
-		if !ok {
-			_, _ = dj.Database.DeleteQueue(queue.ID)
-			continue
+		listeners := 0
+		for state := range dj.Client.Caches.VoiceStates(queue.GuildID) {
+			if state.ChannelID == nil || *state.ChannelID != queue.ChannelID {
+				continue
+			}
+			if state.SelfDeaf || state.GuildDeaf {
+				continue
+			}
+			if state.UserID == dj.Client.ID() || dj.GetNodeByID(state.UserID) != nil {
+				continue
+			}
+			listeners++
 		}
 
-		members := dj.Client.Caches.AudioChannelMembers(audioChannel)
-
-		if len(members) <= 0 {
+		if listeners <= 0 {
 			_, _ = dj.Database.DeleteQueue(queue.ID)
 			continue
 		}
