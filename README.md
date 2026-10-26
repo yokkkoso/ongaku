@@ -8,7 +8,7 @@ Multi-instance Discord music bot written in Go, powered by Lavalink.
 
 ## Features
 
-- Playback from **Spotify**, **Yandex Music**, **SoundCloud**, **YouTube**, and any source supported by Lavalink (requires modifying [/play](./internal/handlers/commands/play.go) and [/search](./internal/handlers/commands/search.go) files).
+- Playback from **Yandex Music**, **SoundCloud**, **YouTube**, and any source supported by Lavalink (requires modifying [/play](./internal/handlers/commands/play.go) and [/search](./internal/handlers/commands/search.go) files).
 - Track and album search via `/search`.
 - Queue with repeat modes.
 - Slash commands + interactive button-based player (pause, next, volume, repeat, stop).

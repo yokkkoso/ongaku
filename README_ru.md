@@ -8,7 +8,7 @@
 
 ## Возможности
 
-- Воспроизведение из **Spotify**, **Yandex Music**, **SoundCloud**, **YouTube** и любых источников, поддерживаемых Lavalink (Для этого нужно изменить [/play](./internal/handlers/commands/play.go) и [/search](./internal/handlers/commands/search.go) файлы).
+- Воспроизведение из **Yandex Music**, **SoundCloud**, **YouTube** и любых источников, поддерживаемых Lavalink (Для этого нужно изменить [/play](./internal/handlers/commands/play.go) и [/search](./internal/handlers/commands/search.go) файлы).
 - Поиск треков и альбомов через `/search`.
 - Очередь с режимами повтора.
 - Slash-команды + интерактивный плеер на кнопках (пауза, следующий, громкость, повтор, остановка).

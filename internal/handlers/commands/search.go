@@ -40,10 +40,6 @@ var searchCommand = discord.SlashCommandCreate{
 					Value: "ymsearch",
 				},
 				{
-					Name:  "Spotify",
-					Value: "spsearch",
-				},
-				{
 					Name:  "YouTube",
 					Value: string(lavalink.SearchTypeYouTube),
 				},

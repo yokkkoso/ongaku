@@ -20,8 +20,6 @@ import (
 var searchPattern = regexp.MustCompile(`^(.{2})search:(.+)`)
 
 var supportedDomains = []string{
-	"spotify.link",
-	"spotify.com",
 	"yandex.ru",
 	"yandex.by",
 	"yandex.kz",
@@ -64,10 +62,6 @@ var playCommand = discord.SlashCommandCreate{
 				{
 					Name:  "Yandex Music",
 					Value: "ymsearch",
-				},
-				{
-					Name:  "Spotify",
-					Value: "spsearch",
 				},
 				{
 					Name:  "SoundCloud",
