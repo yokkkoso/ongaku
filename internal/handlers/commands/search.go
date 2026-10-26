@@ -36,12 +36,12 @@ var searchCommand = discord.SlashCommandCreate{
 			Required:    false,
 			Choices: []discord.ApplicationCommandOptionChoiceString{
 				{
-					Name:  "Spotify (По умолчанию)",
-					Value: "spsearch",
+					Name:  "Yandex Music (По умолчанию)",
+					Value: "ymsearch",
 				},
 				{
-					Name:  "Yandex Music",
-					Value: "ymsearch",
+					Name:  "Spotify",
+					Value: "spsearch",
 				},
 				{
 					Name:  "YouTube",
@@ -60,7 +60,7 @@ func HandleSearchSlashCommand(dj *core.DJ) handler.SlashCommandHandler {
 		if source, ok := data.OptString("source"); ok {
 			identifier = lavalink.SearchType(source).Apply(rawIdentifier)
 		} else if !searchPattern.MatchString(rawIdentifier) {
-			identifier = lavalink.SearchType("spsearch").Apply(rawIdentifier)
+			identifier = lavalink.SearchType("ymsearch").Apply(rawIdentifier)
 		} else {
 			identifier = rawIdentifier
 		}

@@ -58,20 +58,20 @@ var playCommand = discord.SlashCommandCreate{
 			Required:    false,
 			Choices: []discord.ApplicationCommandOptionChoiceString{
 				{
-					Name:  "Spotify (По умолчанию)",
-					Value: "spsearch",
-				},
-				{
-					Name:  "SoundCloud",
-					Value: string(lavalink.SearchTypeSoundCloud),
+					Name:  "YouTube (По умолчанию)",
+					Value: string(lavalink.SearchTypeYouTube),
 				},
 				{
 					Name:  "Yandex Music",
 					Value: "ymsearch",
 				},
 				{
-					Name:  "YouTube",
-					Value: string(lavalink.SearchTypeYouTube),
+					Name:  "Spotify",
+					Value: "spsearch",
+				},
+				{
+					Name:  "SoundCloud",
+					Value: string(lavalink.SearchTypeSoundCloud),
 				},
 			},
 		},
@@ -92,14 +92,14 @@ func HandlePlaySlashCommand(dj *core.DJ) handler.SlashCommandHandler {
 		case isURL:
 			source, ok := data.OptString("source")
 			if !ok {
-				source = "spsearch"
+				source = string(lavalink.SearchTypeYouTube)
 			}
 			identifier = lavalink.SearchType(source).Apply(rawIdentifier)
 		default:
 			if source, ok := data.OptString("source"); ok {
 				identifier = lavalink.SearchType(source).Apply(rawIdentifier)
 			} else if !searchPattern.MatchString(rawIdentifier) {
-				identifier = lavalink.SearchTypeSoundCloud.Apply(rawIdentifier)
+				identifier = lavalink.SearchTypeYouTube.Apply(rawIdentifier)
 			} else {
 				identifier = rawIdentifier
 			}
