@@ -141,7 +141,7 @@ func (n *Node) SetUpClients(
 		bot.WithEventListenerFunc(n.onVoiceServerUpdate),
 		bot.WithEventListenerFunc(n.onReady),
 		bot.WithVoiceManagerConfigOpts(
-			voice.WithDaveSessionCreateFunc(session.New),
+			voice.WithDaveSessionCreateFunc(session.CreateFunc()),
 		),
 	); err != nil {
 		log.Err(err).Msg("Failed to start node bot")

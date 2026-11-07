@@ -3,7 +3,7 @@ module github.com/yokkkoso/ongaku
 go 1.26.0
 
 require (
-	github.com/disgoorg/disgo v0.19.6
+	github.com/disgoorg/disgo v0.20.0
 	github.com/disgoorg/disgolink/v3 v3.1.0
 	github.com/disgoorg/json v1.2.0
 	github.com/disgoorg/lavasearch-plugin v1.0.1-0.20231229185935-76caa6d35100
@@ -14,14 +14,14 @@ require (
 	github.com/pressly/goose/v3 v3.27.1
 	github.com/rs/zerolog v1.35.1
 	github.com/spf13/viper v1.21.0
-	github.com/thomas-vilte/dave-go v0.2.4
+	github.com/thomas-vilte/dave-go v0.5.1
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1
 )
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/disgoorg/godave v0.1.0 // indirect
+	github.com/disgoorg/godave v0.3.0 // indirect
 	github.com/disgoorg/json/v2 v2.0.0 // indirect
 	github.com/disgoorg/omit v1.0.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
@@ -32,7 +32,7 @@ require (
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/klauspost/compress v1.18.6 // indirect
+	github.com/klauspost/compress v1.19.0 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.22 // indirect
 	github.com/mfridman/interpolate v0.0.2 // indirect
@@ -45,11 +45,11 @@ require (
 	github.com/spf13/cast v1.10.0 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
-	github.com/thomas-vilte/mls-go v1.3.1 // indirect
+	github.com/thomas-vilte/mls-go v1.6.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/crypto v0.53.0 // indirect
-	golang.org/x/sync v0.21.0 // indirect
-	golang.org/x/sys v0.46.0 // indirect
-	golang.org/x/text v0.38.0 // indirect
+	golang.org/x/crypto v0.54.0 // indirect
+	golang.org/x/sync v0.22.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/text v0.40.0 // indirect
 )
